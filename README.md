@@ -9,7 +9,7 @@ This project was written in C++ using Visual Studio with Visual Micro for a Fuba
 6. Copy the MAVLINK directory to your Audrino library
 7. 
   * in this file;
-    * C:\Users\"USER_NAME"\AppData\Local\arduino15\packages\chipKIT\hardware\pic32\1.4.0\cores\pic32\chipKIT-application-32MX795F512.ld    
+    * C:\Users\USER_NAME\AppData\Local\arduino15\packages\chipKIT\hardware\pic32\1.4.0\cores\pic32\chipKIT-application-32MX795F512.ld    
   * Change this line;
     * PROVIDE(_min_heap_size = 0x800) ;
   * to this;
