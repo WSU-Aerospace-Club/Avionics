@@ -42,7 +42,11 @@ void loop() {
 	BMP180 baro(&vars);
 	MEMS_Gyro gyro;
 	MEMS_Accel accel;
+	char logString[100];
+	unsigned long logTimeStep = 50;
+	unsigned long logTime = millis();
 	while (1){
+		// executing tasks
 		accel.runAccel();
 		gyro.runGyro();
 		gps.runGPS();
@@ -50,5 +54,16 @@ void loop() {
 		send_telemetry(&vars, &gps, &baro, &gyro, &accel);
 		communication_receive(&vars);
 		communication_send(vars.system_channel);
+		// logging data
+		if (millis()-logTime > logTimeStep){
+			sprintf(logString, "%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d;",
+				baro.altitude, baro.altitude - vars.homeAlt,
+				baro.pressure, baro.temperature,
+				accel.x, accel.y, accel.z,
+				gyro.x, gyro.y, gyro.z,
+				gyro.roll, gyro.pitch, gyro.yaw);
+			logger.writeLog(logString);
+			logTime = millis();
+		}
 	}
 }

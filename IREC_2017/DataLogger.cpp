@@ -75,6 +75,11 @@ void DataLogger::readLog(){
 		//Serial1.println("SD_LOG_OPEN_READ_FAIL");
 	}
 	else{
+#ifdef _WSU_MAVLINK_TEST
+		for (int i = 0; filePtr.available(); i++){
+			Serial.print(filePtr.readString());
+		}
+#endif
 	}
 }
 void DataLogger::writeLog(char * log){
